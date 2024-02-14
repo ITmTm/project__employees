@@ -8,9 +8,9 @@ import './app.scss'
 function App() {
 
 	const data = [
-		{name: 'Anthony S.', salary: 1800, increase: false, like: false, id: 1},
-		{name: 'Timur M.', salary: 2000, increase: true, like: true, id: 2},
-		{name: 'Vildan F.', salary: 2200, increase: false, like: false, id: 3}
+		{name: 'Anthony S.', salary: 1800, increase: false, id: 1},
+		{name: 'Timur M.', salary: 2000, increase: true, id: 2},
+		{name: 'Vildan F.', salary: 2200, increase: false, id: 3}
 	]
 
 	return (
