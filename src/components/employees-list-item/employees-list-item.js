@@ -3,6 +3,9 @@ import {Component} from "react";
 import './employees-list-item.scss'
 
 class EmployeesListItem extends Component {
+	constructor(props) {
+		super(props);
+	}
 	render() {
 		const {name, salary, increase} = this.props;
 
