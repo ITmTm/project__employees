@@ -4,6 +4,7 @@ import './employees-list-item.scss'
 
 class EmployeesListItem extends Component {
 	render() {
+		const {name, salary, increase} = this.props;
 
 		let classNames = "list-group-item d-flex justify-content-between"
 
