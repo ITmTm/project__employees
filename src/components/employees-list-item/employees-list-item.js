@@ -17,7 +17,7 @@ class EmployeesListItem extends Component {
 		}))
 	}
 
-	onLikes = () => {
+	onAddLikes = () => {
 		this.setState(({like}) => ({
 			like: !like
 		}))
@@ -41,7 +41,7 @@ class EmployeesListItem extends Component {
 			<li className={classNames}>
 				<span
 					className="list-group-item-label"
-					onClick={this.onLikes}
+					onClick={this.onAddLikes}
 				>
 					{name}
 				</span>
