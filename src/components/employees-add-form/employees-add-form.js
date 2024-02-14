@@ -3,6 +3,13 @@ import {Component} from "react";
 import './employees-add-form.scss'
 
 class EmployeesAddForm extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			name: '',
+			salary: 0
+		}
+	}
 	render() {
 		return (
 			<div className="app-add-form">
