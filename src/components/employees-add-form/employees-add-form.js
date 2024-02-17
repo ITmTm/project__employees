@@ -7,7 +7,9 @@ class EmployeesAddForm extends Component {
 		super(props);
 		this.state = {
 			name: '',
-			salary: ''
+			salary: '',
+			nameValid: true,
+			salaryValid: true
 		}
 	}
 
@@ -22,30 +24,40 @@ class EmployeesAddForm extends Component {
 
 		const {name, salary} = this.state;
 
-		// Проверка на наличие значений в полях
-		if (!name.trim() || !salary.trim()) {
-			return alert('Поля не должны быть пустыми');
-		}
-
-		// Проверка на минимальную длину имени и зарплаты
-		if (name.length < 2) {
-			return alert("Имя должно содержать не менее 2 букв")
-		}
-
-		if (isNaN(salary) || parseFloat(salary) <= 0) {
-			return alert('З/П должна быть больше нуля')
+		if (!this.validateName(name) || !this.validateSalary(salary)) {
+			return
 		}
 
 		this.props.onAdd(name, parseFloat(salary));
 		this.setState({
 			name: '',
-			salary: ''
+			salary: '',
+			nameValid: true,
+			salaryValid: true
 		})
+	}
+
+	validateName = (name) => {
+		const nameValid = /^[A-Za-zА-Яа-яё]+$/u.test(name) && name.length >= 2;
+		if (!nameValid) {
+			alert('Имя должно содержать минимум 2 буквы и не должно содержать цифры');
+			this.setState({nameValid})
+		}
+		return nameValid
+	}
+
+	validateSalary = (salary) => {
+		const salaryValid = salary.length >= 2 && !isNaN(parseFloat(salary)) && parseFloat(salary) > 0;
+		if (!salaryValid) {
+			alert('З/П должна содержать минимум 2 цифры и быть больше нуля');
+			this.setState({ salaryValid });
+		}
+		return salaryValid
 	}
 
 
 	render() {
-		const {name, salary} = this.state;
+		const {name, salary, nameValid, salaryValid} = this.state;
 
 		return (
 			<div className="app-add-form">
@@ -55,7 +67,7 @@ class EmployeesAddForm extends Component {
 					onSubmit={this.onSubmit}
 				>
 					<input type="text"
-						   className="form-control new-post-label"
+						   className={`form-control new-post-label ${nameValid ? '' : 'invalid'}`}
 						   placeholder="Как его зовут?"
 						   name="name"
 						   value={name}
@@ -63,7 +75,7 @@ class EmployeesAddForm extends Component {
 					/>
 
 					<input type="number"
-						   className="form-control new-post-label"
+						   className={`form-control new-post-label ${salaryValid ? '' : 'invalid'}`}
 						   placeholder="З/П в $?"
 						   name="salary"
 						   value={salary}
