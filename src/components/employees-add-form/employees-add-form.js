@@ -19,12 +19,17 @@ class EmployeesAddForm extends Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
+		if (this.state.name.length < 2 || this.state.salary.length < 2) {
+			return alert('Имя и З/П должно содержать не менее 2 букв или 2 цифр');
+		}
 		this.props.onAdd(this.state.name, this.state.salary);
 		this.setState({
 			name: '',
 			salary: ''
 		})
 	}
+
+
 	render() {
 		const {name, salary} = this.state;
 
