@@ -34,6 +34,7 @@ class App extends Component {
 			name,
 			salary,
 			increase: false,
+			like: false,
 			id: this.maxId++
 		}
 		this.setState(({data}) => {
@@ -45,7 +46,15 @@ class App extends Component {
 	}
 
 	onToggleIncrease = (id) => {
-		console.log(`Increase this ${id}`);
+
+		this.setState(({data}) => ({
+			data: data.map(item => {
+				if (item.id === id) {
+					return {...item, increase: !item.increase};
+				}
+				return item;
+			})
+		}))
 	}
 
 	onToggleLike = (id) => {
@@ -53,9 +62,11 @@ class App extends Component {
 	}
 
 	render() {
+		const employees = this.state.data.length;
+		const increased = this.state.data.filter(item => item.increase).length;
 		return (
 			<div className='app'>
-				<AppInfo />
+				<AppInfo employees={employees} increased={increased}/>
 
 				<div className="search-panel">
 					<SearchPanel />
