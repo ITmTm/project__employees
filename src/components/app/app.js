@@ -12,9 +12,9 @@ class App extends Component {
 		super(props);
 		this.state = {
 			data: [
-				{name: 'Anthony S.', salary: 1800, increase: false, id: 1},
-				{name: 'Timur M.', salary: 2000, increase: true, id: 2},
-				{name: 'Vildan F.', salary: 2200, increase: false, id: 3}
+				{name: 'Anthony S.', salary: 1800, increase: false, like: true, id: 1},
+				{name: 'Timur M.', salary: 2000, increase: true, like: false, id: 2},
+				{name: 'Vildan F.', salary: 2200, increase: false, like: false, id: 3}
 			]
 		}
 		this.maxId = 4;
@@ -44,6 +44,14 @@ class App extends Component {
 		})
 	}
 
+	onToggleIncrease = (id) => {
+		console.log(`Increase this ${id}`);
+	}
+
+	onToggleLike = (id) => {
+		console.log(`Like this ${id}`);
+	}
+
 	render() {
 		return (
 			<div className='app'>
@@ -57,6 +65,8 @@ class App extends Component {
 				<EmployeesList
 					data={this.state.data}
 					onDelete={this.deleteItem}
+					onToggleIncrease={this.onToggleIncrease}
+					onToggleLike={this.onToggleLike}
 				/>
 				<EmployeesAddForm
 					onAdd={this.addItem}
