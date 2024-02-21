@@ -15,7 +15,8 @@ class App extends Component {
 				{name: 'Anthony S.', salary: 1800, increase: false, like: true, id: 1},
 				{name: 'Timur M.', salary: 2000, increase: true, like: false, id: 2},
 				{name: 'Vildan F.', salary: 2200, increase: false, like: false, id: 3}
-			]
+			],
+			term: ''
 		}
 		this.maxId = 4;
 	}
@@ -56,10 +57,22 @@ class App extends Component {
 		}))
 	}
 
+	searchEmp = (items, term) => {
+		if (term.length === 0) {
+			return items;
+		}
+
+		return items.filter(item => {
+			return item.name.indexOf(term) > -1
+		})
+	}
+
 
 	render() {
+		const {data, term} = this.state;
 		const employees = this.state.data.length;
 		const increased = this.state.data.filter(item => item.increase).length;
+		const visibleData = this.searchEmp(data, term);
 		return (
 			<div className='app'>
 				<AppInfo employees={employees} increased={increased}/>
@@ -70,7 +83,7 @@ class App extends Component {
 				</div>
 
 				<EmployeesList
-					data={this.state.data}
+					data={visibleData}
 					onDelete={this.deleteItem}
 					onToggleProp={this.onToggleProp}
 				/>
