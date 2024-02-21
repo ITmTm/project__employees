@@ -17,7 +17,7 @@ class App extends Component {
 				{name: 'Vildan F.', salary: 2200, increase: false, like: false, id: 3}
 			],
 			term: '',
-			filter: ''
+			filter: 'all'
 		}
 		this.maxId = 4;
 	}
@@ -83,6 +83,10 @@ class App extends Component {
 		}
 	}
 
+	onFilterSelect = (filter) => {
+		this.setState({filter});
+	}
+
 
 	render() {
 		const {data, term, filter} = this.state;
@@ -97,7 +101,10 @@ class App extends Component {
 					<SearchPanel
 						onUpdateSearch={this.onUpdateSearch}
 					/>
-					<AppFilter />
+					<AppFilter
+						filter={filter}
+						onFilterSelect={this.onFilterSelect}
+					/>
 				</div>
 
 				<EmployeesList
